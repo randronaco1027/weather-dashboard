@@ -18,7 +18,8 @@ fetch(url)
         console.log(data)
         var milliseconds = new Date(data.current.dt * 1000);
         var currentDate = milliseconds.toLocaleDateString();
-        var textDisplay = data.timezone + " (" + currentDate + ")"
+        var cityName = data.timezone.split("/")
+        var textDisplay = cityName[1] + " (" + currentDate + ")"
         $("#cityDisplay").text(textDisplay)
         $("#temp").text(data.current.temp + "°F")
         $("#wind").text(data.current.wind_speed + " MPH")
