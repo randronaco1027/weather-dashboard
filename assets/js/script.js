@@ -7,8 +7,7 @@ $("#cityBtn").click(function () {
 
 var lat = "30.267151"
 var lon = "-97.743057"
-var key = "745b025da524f67261b6a7f65eb9dc66"
-var lang = "en"
+
 var url = 'http://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&appid=745b025da524f67261b6a7f65eb9dc66&lang=en&units=imperial'
 fetch(url)
     .then(function (response) {
@@ -71,13 +70,13 @@ fetch(url)
             $("#uvIndex").addClass("uv-low")
         }
         else if (data.current.uvi >= 3 && data.current.uvi < 6) {
-            $("#uvIndex").addClass("uv-low")
+            $("#uvIndex").addClass("uv-moderate")
         }
         else if (data.current.uvi >= 6 && data.current.uvi < 8) {
-            $("#uvIndex").addClass("uv-low")
+            $("#uvIndex").addClass("uv-high")
         }
         else if (data.current.uvi >= 8 && data.current.uvi < 11) {
-            $("#uvIndex").addClass("uv-low")
+            $("#uvIndex").addClass("uv-very-high")
         }
         else if (data.current.uvi >= 11) {
             $("#uvIndex").addClass("uv-extreme")
