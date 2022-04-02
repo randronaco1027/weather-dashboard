@@ -7,8 +7,9 @@ $("#cityBtn").click(function () {
 
 var lat = "30.267151"
 var lon = "-97.743057"
+// API key = 745b025da524f67261b6a7f65eb9dc66
 
-var url = 'http://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&appid=745b025da524f67261b6a7f65eb9dc66&lang=en&units=imperial'
+var url = `https://api.openweathermap.org/data/2.5/uvi?appid=745b025da524f67261b6a7f65eb9dc66&lat=${response.coord.lat}&lon=${response.coord.lon}`
 fetch(url)
     .then(function (response) {
         return response.json();
