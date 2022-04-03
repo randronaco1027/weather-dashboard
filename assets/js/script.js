@@ -1,20 +1,26 @@
 let apiKey = "745b025da524f67261b6a7f65eb9dc66"
 let citySearchTerm = "Phoenix"
-
-// $("#cityBtn").click(function () {
-//     let citySearchTerm = $("#city-search-term").val()
-//     let urlCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearchTerm + "&Appid=" + apiKey + "&units=imperial";
-//     console.log(citySearchTerm)
-//     if (citySearchTerm == "") {
-//         console.log(citySearchTerm);
-//     } else {
-//         $.ajax({
-//             url: urlCurrent,
-//             method: "GET"
-//         }).then(function (response) {
-// })
-
 let url = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearchTerm + "&Appid=" + apiKey + "&units=imperial"
+
+$("#cityBtn").click(function () {
+    let citySearchTerm = $("#city-search-term").val()
+    console.log(citySearchTerm)
+    // let urlCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearchTerm + "&Appid=" + apiKey + "&units=imperial";
+
+    // if (citySearchTerm == "") {
+    //     console.log(citySearchTerm);
+    // } else {
+    //     $.ajax({
+    //         url: urlCurrent,
+    //         method: "GET"
+    //     }).then(function (response) {
+    //         return response.json()
+    //     })
+    //     .then(function (dataDisplay) {
+    //         loadWeather()
+    //     })
+    // }
+})
 
 fetch(url)
     .then(function (response) {
@@ -123,6 +129,3 @@ fetch(url)
                 $("#humidity5").text(dataForecast.daily[5].humidity + "%")
             })
     })
-
-
-
