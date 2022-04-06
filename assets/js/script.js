@@ -10,6 +10,8 @@ $("#cityBtn").click(function (event) {
     localStorage.setItem("newCity", JSON.stringify(storedCities))
 
     console.log(citySearchTerm)
+    $("#searched-cities").prepend(citySearchTerm + "</br>")
+
     let urlCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearchTerm + "&Appid=" + apiKey + "&units=imperial";
 
     if (citySearchTerm == "") {
@@ -131,22 +133,28 @@ $("#cityBtn").click(function (event) {
     }
 })
 
+
+
+
+// var cityButton= $('<input type="button"/>')
+// $("#searched-cities").append(cityButton);
+// let cityButton = []
 var displayCities = JSON.parse(localStorage.getItem("newCity")) || []
+console.log(displayCities.length)
 
 
-$(function(){
-    $("#cityBtn").on('click',function(){
-        var cityButton= $('<input type="button" value="new button"/>');
-        $("#searched-cities").append(cityButton);
-        for (var i = 0; i < displayCities.length; i++) {
-            let displaySearched = []
-            displaySearched[i] = $("<p>").text(displayCities[i]);
-            console.log(displayCities[i])
-            $("#searched-cities").append(displaySearched[i])
-        }
-    });
-});
+for (var i = 0; i < displayCities.length; i++) {
+    $("#searched-cities").prepend("</br>" + displayCities[i] + "</br>")
+    console.log(displayCities[i])
+    // $("#searched-cities").prepend("</br>" + displayCities[i] + "</br>")
+    // cityButton[i]= $('<input type="button"/>')
+    // $(cityButton[i]).prop("value", displayCities[i])
+    // cityButton[i].text(displayCities[i])
+}
 
-$("#clearBtn").on("click", function(){
+
+
+
+$("#clearBtn").on("click", function () {
     localStorage.clear()
 })
