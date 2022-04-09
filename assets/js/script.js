@@ -37,12 +37,7 @@ function fetchApi(citySearchTerm) {
                             $(searchedCityBtn).text(citySearchTerm)
                             $("#searched-cities").prepend(searchedCityBtn)
                         }
-                        // storedCities.push(citySearchTerm);
-                        // localStorage.setItem("newCity", JSON.stringify(storedCities))
-
-                        // Add buttons of previously searched cities once searched
-
-
+                
                         // Separate API call for forecasted weather
                         let urlForecast = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + data.coord.lat + '&lon=' + data.coord.lon + '&appid=' + apiKey + '&units=imperial'
                         fetch(urlForecast)
