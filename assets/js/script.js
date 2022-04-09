@@ -7,6 +7,7 @@ $("#cityBtn").click(function (event) {
 
     fetchApi(citySearchTerm)
 })
+
 function fetchApi(citySearchTerm) {
     // First API call for current weather
     let urlCurrent = "https://api.openweathermap.org/data/2.5/weather?q=" + citySearchTerm + "&Appid=" + apiKey + "&units=imperial";
@@ -26,13 +27,21 @@ function fetchApi(citySearchTerm) {
                     .then(function (data) {
                         // Local Storage
                         var storedCities = JSON.parse(localStorage.getItem("newCity")) || []
-                        storedCities.push(citySearchTerm);
-                        localStorage.setItem("newCity", JSON.stringify(storedCities))
+                        let storedCitiesUpper = JSON.stringify(storedCities).toUpperCase()
+                        let citySearchTermUpper = JSON.stringify(citySearchTerm).toUpperCase()
+                        
+                        if (storedCitiesUpper.indexOf(citySearchTermUpper) == -1) {
+                            storedCities.push(citySearchTerm);
+                            window.localStorage.setItem("newCity", JSON.stringify(storedCities));
+                            var searchedCityBtn = document.createElement('button')
+                            $(searchedCityBtn).text(citySearchTerm)
+                            $("#searched-cities").prepend(searchedCityBtn)
+                        }
+                        // storedCities.push(citySearchTerm);
+                        // localStorage.setItem("newCity", JSON.stringify(storedCities))
 
                         // Add buttons of previously searched cities once searched
-                        var searchedCityBtn = document.createElement('button')
-                        $(searchedCityBtn).text(citySearchTerm)
-                        $("#searched-cities").prepend(searchedCityBtn)
+
 
                         // Separate API call for forecasted weather
                         let urlForecast = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + data.coord.lat + '&lon=' + data.coord.lon + '&appid=' + apiKey + '&units=imperial'
@@ -50,22 +59,41 @@ function fetchApi(citySearchTerm) {
                                 $("#wind").text(data.wind.speed + " MPH")
                                 $("#humidity").text(data.main.humidity + "%")
                                 $("#uvIndex").text(dataForecast.current.uvi)
-                                console.log(dataForecast)
 
                                 // UV Index Color Coding
                                 if (dataForecast.current.uvi < 3) {
                                     $("#uvIndex").addClass("uv-low")
+                                    $("#uvIndex").removeClass("uv-moderate")
+                                    $("#uvIndex").removeClass("uv-high")
+                                    $("#uvIndex").removeClass("uv-very-high")
+                                    $("#uvIndex").removeClass("uv-extreme")
                                 }
                                 else if (dataForecast.current.uvi >= 3 && dataForecast.current.uvi < 6) {
+                                    $("#uvIndex").removeClass("uv-low")
                                     $("#uvIndex").addClass("uv-moderate")
+                                    $("#uvIndex").removeClass("uv-high")
+                                    $("#uvIndex").removeClass("uv-very-high")
+                                    $("#uvIndex").removeClass("uv-extreme")
                                 }
                                 else if (dataForecast.current.uvi >= 6 && dataForecast.current.uvi < 8) {
+                                    $("#uvIndex").removeClass("uv-low")
+                                    $("#uvIndex").removeClass("uv-moderate")
                                     $("#uvIndex").addClass("uv-high")
+                                    $("#uvIndex").removeClass("uv-very-high")
+                                    $("#uvIndex").removeClass("uv-extreme")
                                 }
                                 else if (dataForecast.current.uvi >= 8 && dataForecast.current.uvi < 11) {
+                                    $("#uvIndex").removeClass("uv-low")
+                                    $("#uvIndex").removeClass("uv-moderate")
+                                    $("#uvIndex").removeClass("uv-high")
                                     $("#uvIndex").addClass("uv-very-high")
+                                    $("#uvIndex").removeClass("uv-extreme")
                                 }
                                 else if (dataForecast.current.uvi >= 11) {
+                                    $("#uvIndex").removeClass("uv-low")
+                                    $("#uvIndex").removeClass("uv-moderate")
+                                    $("#uvIndex").removeClass("uv-high")
+                                    $("#uvIndex").removeClass("uv-very-high")
                                     $("#uvIndex").addClass("uv-extreme")
                                 }
 
