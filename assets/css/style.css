@@ -62,3 +62,20 @@
     padding: 8px;
     margin: 10px;
 }
+
+@media screen and (max-width: 768px) {
+    .d-flex {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin: 5%;
+    }
+
+    .main-box {
+        margin: 0;
+    }
+
+    .container {
+        padding: 0;
+    }
+}
